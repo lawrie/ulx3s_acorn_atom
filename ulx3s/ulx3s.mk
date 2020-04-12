@@ -1,6 +1,24 @@
-DEVICE ?= 85k
 PIN_DEF ?= ulx3s_v20.lpf
-IDCODE ?= 0x41113043 # 85f
+
+FPGA_SIZE ?= 85
+
+DEVICE ?= $(FPGA_SIZE)k
+
+ifeq ($(FPGA_SIZE), 12)
+        CHIP_ID=0x21111043
+        FPGA_KS = 25k
+endif
+ifeq ($(FPGA_SIZE), 25)
+        CHIP_ID=0x41111043
+endif
+ifeq ($(FPGA_SIZE), 45)
+        CHIP_ID=0x41112043
+endif
+ifeq ($(FPGA_SIZE), 85)
+        CHIP_ID=0x41113043
+endif
+
+IDCODE = $(CHIP_ID)
 
 BUILDDIR = bin
 

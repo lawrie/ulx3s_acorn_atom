@@ -33,7 +33,7 @@ The SD card image is at https://github.com/hoglet67/AtomSoftwareArchive/releases
 
 The SD card is in a raw SDDOS format and is read by 6502 software.
 
-Using a PS/2 keyboard connected to us2, do Shift+F10 to start the StarDor software archive on the SD card.
+Using a PS/2 keyboard connected to us2, do Shift+F10 to start the StarDot software archive on the SD card.
 You can do Ctrl+F10 to start Basic.
 
 There is both HDMI output and VGA output via a Digilent VGA Pmod.
