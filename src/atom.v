@@ -36,7 +36,6 @@ module atom
              // Cassette / Sound
              input         cas_in,
              output        cas_out,
-             output        sound,
 	     // Buttons
 	     input [6:0]   btn,
              // Keyboard
@@ -53,6 +52,9 @@ module atom
 	     // HDMI
 	     output [3:0]  gpdi_dp, 
              output [3:0]  gpdi_dn,
+	     // Audio
+	     output  [3:0] audio_l, 
+             output  [3:0] audio_r,
 	     // Leds
 	     output [7:0]  leds,
 	     output reg [15:0] diag
@@ -308,7 +310,8 @@ module atom
             cas_div <= cas_div + 1;
        end
 
-   assign sound = pia_pc[2] & sid_audio;
+   assign audio_l = pia_pc[2] & sid_audio ? 4'b1111 : 4'b0;
+   assign audio_r = pia_pc[2] & sid_audio ? 4'b1111 : 4'b0;
 
    // this is a direct translation of the logic in the atom
    // (two NAND gates and an inverter)
