@@ -1,8 +1,10 @@
 # ulx3s_acorn_atom
 
-Ulx3s port of Ice40Atom
+![Acorn Atom](https://upload.wikimedia.org/wikipedia/commons/2/29/Acorn_atom_zx1.jpg)
 
-Thanks to https://github.com/hoglet67 for the Ice40 version
+Ulx3s port of [Ice40Atom](https://github.com/hoglet67/Ice40Atom)
+
+Thanks to [David Banks](https://github.com/hoglet67) for the Ice40 version
 
 To build and upload the bit file do:
 
@@ -29,7 +31,7 @@ You should then copy that to flash memory, e.g by ftp to the esp32:
 put atom_roms.bin flash@0x70000
 ```
 
-The SD card image is at https://github.com/hoglet67/AtomSoftwareArchive/releases/download/V10BETA3/AtomSoftwareArchive_20170829_V10Beta3_SDDOS.zip
+You can download the [SD card image](https://github.com/hoglet67/AtomSoftwareArchive/releases/download/V11BETA6/AtomSoftwareArchive_20190825_1442_V11Beta6_SDDOS2.zip), unzip it and write the raw img file to an SD card, e.g. by `dd if=archive.img of=/dev/sdxxx` on Linux.
 
 The SD card is in a raw SDDOS format and is read by 6502 software.
 
@@ -38,7 +40,7 @@ You can do Ctrl+F10 to start Basic.
 
 There is both HDMI output and VGA output via a Digilent VGA Pmod.
 
-Currently only the 85F version is being built.
+The default build is for the 85f. You can build for other boards using the DEVICE parameter to the make file, e.g. `make DEVICE=12k`.
 
-Sound is not yet working.
+Sound is produced using an implementation of the Commodore Sid chip.
 
