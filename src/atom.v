@@ -70,7 +70,7 @@ module atom
    parameter CHARROM_INIT_FILE = "../mem/charrom.mem";
    parameter VID_RAM_INIT_FILE = "../mem/vid_ram.mem";
 
-   // pull-ups for us1 connector 
+   // pull-ups for us2 connector 
    assign usb_fpga_pu_dp = 1;
    assign usb_fpga_pu_dn = 1;
 
@@ -232,6 +232,7 @@ module atom
      .spi_mosi(flash_mosi),
      .spi_miso(flash_miso)
    );
+
    // ===============================================================
    // Keyboard
    // ===============================================================
@@ -653,5 +654,5 @@ module atom
      .vSync(vsync),
      .gpdi_dp(gpdi_dp),
      .gpdi_dn(gpdi_dn)
-);
+   );
 endmodule
