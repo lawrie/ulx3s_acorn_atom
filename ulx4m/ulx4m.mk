@@ -1,22 +1,25 @@
-PIN_DEF ?= ulx3s_v20.lpf
+PIN_DEF ?= ulx4m_v002.lpf
 
-DEVICE ?= 85k
-
-TOP ?= top
+DEVICE ?= um-45k
 
 BUILDDIR = bin
+
+TOP ?= top
 
 compile: $(BUILDDIR)/toplevel.bit
 
 prog: $(BUILDDIR)/toplevel.bit
 	fujprog $^
 
+dfu: $(BUILDDIR)/toplevel.bit
+	dfu-util -a 0 -D  $^ -R
+
 $(BUILDDIR)/toplevel.json: $(VERILOG)
 	mkdir -p $(BUILDDIR)
 	yosys \
 	-p "read -sv $^" \
 	-p "hierarchy -top ${TOP}" \
-	-p "synth_ecp5 -abc9 -json $@" \
+	-p "synth_ecp5 -json $@" \
 
 $(BUILDDIR)/%.config: $(PIN_DEF) $(BUILDDIR)/toplevel.json
 	nextpnr-ecp5 --${DEVICE} --package CABGA381 --timing-allow-fail --freq 25 --textcfg  $@ --json $(filter-out $<,$^) --lpf $<
