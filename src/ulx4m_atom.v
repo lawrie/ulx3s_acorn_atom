@@ -35,13 +35,22 @@ module atom
 	     // Buttons
 	     input [2:1]   btn,
              // Keyboard
-             inout [27:25] gpio,
+             inout [27:0] gpio,
 	     // HDMI
 	     output [3:0]  gpdi_dp, 
              output [3:0]  gpdi_dn,
 	     // Leds
 	     output [3:0]  led,
              );
+
+   // GPIO mapping
+   assign gpio[12] = 1'b0; //gain
+   assign gpio[6] = 1'b1;  // shutdown
+   assign ps2_clk_int = gpio[3];
+   assign ps2_data_int = gpio[26];
+
+   wire audio;
+   assign gpio[4] = audio;
 
    // Video
    wire [3:0]  red;
@@ -249,9 +258,6 @@ module atom
       .TURBO(turbo)
       );
 
-   assign ps2_clk_int = gpio[26];
-   assign ps2_data_int = gpio[25];
-
    // ===============================================================
    // LEDs
    // ===============================================================
@@ -296,7 +302,7 @@ module atom
             cas_div <= cas_div + 1;
        end
 
-   assign gpio[27] = pia_pc[2] & sid_audio;
+   assign audio = pia_pc[2] & sid_audio;
 
    // this is a direct translation of the logic in the atom
    // (two NAND gates and an inverter)
